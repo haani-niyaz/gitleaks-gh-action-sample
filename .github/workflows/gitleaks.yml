@@ -1,0 +1,22 @@
+name: Gitleaks
+
+on: [pull_request, push, workflow_dispatch]
+
+jobs:
+  gitleaks:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+          - name: Check out the repo
+            uses: actions/checkout@v2
+          # - name: Run gitleaks
+          #   uses: addnab/docker-run-action@v3
+          #   with:
+          #       image: ghcr.io/zricethezav/gitleaks:latest
+          #       options: -v ${{ github.workspace }}:/path 
+          #       run: |
+          #        detect -v --source="/path" 
+          - name: Run gitleaks
+            run:  docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:latest detect -v --source="/path"  --redact
+
+  
