@@ -12,17 +12,37 @@ jobs:
     steps:
           - name: Check out the repo
             uses: actions/checkout@v2
-          - name: Run gitleaks for security scanning alerts
-            run:  docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact --report-format sarif --report-path="/path/result.sarif" --exit-code=0          
-          - name: Upload SARIF file
-            uses: github/codeql-action/upload-sarif@v2
-            with:
-              # Path to SARIF file relative to the root of the repository
-              sarif_file: result.sarif
-              # Optional category for the results
-              category: secret-analysis
+          # - name: Run gitleaks for security scanning alerts
+          #   run:  docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact --report-format sarif --report-path="/path/result.sarif" --exit-code=0          
+          # - name: Upload SARIF file
+          #   uses: github/codeql-action/upload-sarif@v2
+          #   with:
+          #     # Path to SARIF file relative to the root of the repository
+          #     sarif_file: result.sarif
+          #     # Optional category for the results
+          #     category: secret-analysis
           - name: Run gitleaks
-            run: docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact
+            run: docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact        
+
+  run-if-failed:
+    runs-on: ubuntu-latest    
+    needs: [gitleaks]    
+    if: always() && (needs.gitleaks.result == 'failure')
+    permissions:      
+      security-events: write
+    steps:
+    - name: Generate gitleaks SARIF file
+      run:  docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact --report-format sarif --report-path="/path/result.sarif" --exit-code=0          
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: result.sarif
+        # Optional category for the results
+        category: secret-analysis
+
+
+
           
         
 
