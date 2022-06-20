@@ -13,7 +13,9 @@ jobs:
           - name: Check out the repo
             uses: actions/checkout@v2
           - name: Run gitleaks
-            run:   docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:latest detect -v --source="/path"  --redact --report-format sarif --report-path="/path/results.sarif" --exit-code=0
+            run:  docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:latest detect -v --source="/path"  --redact --report-format sarif --report-path="/path/results.sarif" --exit-code=0
+          - name: workspace
+            run: echo ${{ github.workspace }}
           - name: ls  
             run: ls -la 
           - name: Upload SARIF file
