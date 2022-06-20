@@ -22,7 +22,7 @@ jobs:
           #     # Optional category for the results
           #     category: secret-analysis
           - name: Run gitleaks
-            run: docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact        
+            run: docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact --exit-code=0       
 
   run-if-failed:
     name: report
