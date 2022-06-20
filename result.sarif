@@ -142,7 +142,7 @@
        }
       },
       {
-       "id": "doppler-api-token",
+       "id": "dropbox-api-token",
        "name": "Dropbox API secret",
        "shortDescription": {
         "text": "(?i)(?:dropbox)(?:[0-9a-z\\-_\\t .]{0,20})(?:[\\s|']|[\\s|\"]){0,3}(?:=|\u003e|:=|\\|\\|:|\u003c=|=\u003e|:)(?:'|\\\"|\\s|=|\\x60){0,5}([a-z0-9]{15})(?:['|\\\"|\\n|\\r|\\s|\\x60]|$)"
@@ -233,17 +233,17 @@
        }
       },
       {
-       "id": "flutterwave-public-key",
-       "name": "Finicity Secret Key",
+       "id": "flutterwave-secret-key",
+       "name": "Flutterwave Secret Key",
        "shortDescription": {
         "text": "FLWSECK_TEST-(?i)[a-h0-9]{32}-X"
        }
       },
       {
-       "id": "flutterwave-public-key",
-       "name": "Finicity Secret Key",
+       "id": "flutterwave-encryption-key",
+       "name": "Flutterwave Encryption Key",
        "shortDescription": {
-        "text": "FLWSECK_TEST-(?i)[a-h0-9]{32}-X"
+        "text": "FLWSECK_TEST-(?i)[a-h0-9]{12}"
        }
       },
       {
