@@ -10,7 +10,7 @@ jobs:
           - name: Check out the repo
             uses: actions/checkout@v2
           - name: Run gitleaks
-            run: docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:v8.8.8 detect -v --source="/path"  --redact
+            run: docker run -v ${{ github.workspace }}:/path zricethezav/gitleaks:latest detect -v --source="/path"  --redact
 
   run-if-failed:
     name: Github Security Report (if gitleaks fails)
